@@ -5,6 +5,8 @@ import (
 	"sync"
 )
 
+// go run  -race main.go - to check the race's in the file
+
 // refernece blog https://kamnagarg-10157.medium.com/understanding-mutex-in-go-5f41199085b9
 
 var counter = 0
