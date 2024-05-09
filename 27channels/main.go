@@ -49,7 +49,9 @@ func main() {
 	// to check if channel is open or not
 	value, isChannelOpened := <-myChannel
 	fmt.Printf("Is channel Open: %v\n value from the channel: %v\n", isChannelOpened, value)
-	BufferedChannel()
+	// BufferedChannel()
+	goroutines()
+
 }
 
 func BufferedChannel() {
@@ -69,4 +71,26 @@ func BufferedChannel() {
 
 	y := <-ch      // Receiving the value from the channel
 	fmt.Println(y) // Output: 2
+}
+
+func goroutines() {
+
+	myChan := make(chan string)
+	anotherChan := make(chan string)
+
+	go func() {
+		myChan <- "data"
+	}()
+
+	go func() {
+		anotherChan <- "Hello World!"
+	}()
+
+	select {
+	case data := <-myChan:
+		fmt.Println("DATA: ", data)
+	case value := <-anotherChan:
+		fmt.Println("Msg: ", value)
+	}
+
 }
